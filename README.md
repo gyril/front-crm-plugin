@@ -12,14 +12,13 @@ The plugin will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ## How to use it
-This app creates a bridge between a conversation displayed in Front and a contact record that you keep in a separate system.<br />
-Every time the selected conversation changes in Front, a `GET` call will be made to the following URL: `https://your.api.domain/your_uri?auth_secret=APP_SECRET&contact_key=CONTACT_KEY`
+This app creates a bridge between a conversation displayed in Front and a contact record that you keep in a separate system. Every time the selected conversation changes in Front, a `GET` call will be made to the following URL: `https://your.api.domain/your_uri?auth_secret=APP_SECRET&contact_key=CONTACT_KEY`
 
-- `https://your.api.domain/your_uri` is the endpoint you will provide that will return the contact data. You can set it in the `sec/Config.js` file.
-- `APP_SECRET` is the randomly-generated secret for your app. Use it to authenticate the call, and only reply when the secret sent matches the secret you should expect.
+- `https://your.api.domain/your_uri` is the endpoint you will provide that will return the contact data. You can set it in the `src/Config.js` file.
+- `APP_SECRET` is the randomly-generated secret for your app. You will find it in the plugin's settings in Front. Use it to authenticate the call, and only reply when the secret sent matches the secret you should expect.
 - `CONTACT_KEY` is the key that identifies the contact displayed. For an email conversation, it will be an email address; for a Twitter conversation, a Twitter handle; for a text conversation, a phone number; etc.
 
-The expected response to this call should be valid JSON of the following structure:
+The expected response to this call should be valid JSON blob of the following structure:
 ```
 {
   "data":
