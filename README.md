@@ -2,9 +2,9 @@
 This project allows you to build a simple companion app for Front, that will display data based on the recipient of the message that is currently in view in Front.
 
 ## Getting Started
-- Clone this repository
-- From within the repository, run `yarn install`
-- Run `yarn start` to run the app in the development mode
+- Clone this repository.
+- From within the repository, run `yarn install`.
+- Run `yarn start` to run the app in the development mode.
 - Visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.
 - Add https://localhost:3000 as a plugin in your Front account, in dev mode.
 
