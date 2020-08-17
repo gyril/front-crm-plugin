@@ -1,5 +1,5 @@
 ## What is this?
-This project allows you to build a simple companion app for Front, that will display data coming based on the recipient of the message that is currently in view in Front.
+This project allows you to build a simple companion app for Front, that will display data based on the recipient of the message that is currently in view in Front.
 
 ## How to use it
 This app creates a bridge between a conversation displayed in Front and a contact record that you keep in a separate system.<br />
