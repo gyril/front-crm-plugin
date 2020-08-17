@@ -5,7 +5,7 @@ const Date = ({ value }) => {
   const parsedDate = DateTime.fromISO(value);
 
   if (parsedDate.invalid)
-    return <em>Not found.</em>;
+    return <em>Invalid date</em>;
   
   return parsedDate.toFormat('D');
 };

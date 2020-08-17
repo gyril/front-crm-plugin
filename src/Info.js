@@ -41,7 +41,7 @@ const Info = ({ contactKey }) => {
         <div className="info-card-contact">{info.contact?.name}</div>
         <div><FrontCompose to={info.contact?.email} label={info.contact?.email} /></div>
         { info.account ? (
-          <div className="info-card-account"><FrontLink href={info.account.website} label={info.account.name} /></div>
+          <div className="info-card-account"><FrontLink href={info.account.url} label={info.account.name} /></div>
         ) : undefined }
       </div>
       <div className="info-contact">
