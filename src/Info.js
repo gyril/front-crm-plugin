@@ -9,6 +9,7 @@ const Info = ({ contactKey }) => {
 
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (info.contactKey === contactKey)
@@ -18,19 +19,34 @@ const Info = ({ contactKey }) => {
     const emptyInfo = {contactKey: contactKey};
 
     setLoadingState(true);
+    setError(null);
 
     fetch(`${uri}`, {
       method: 'GET',
       mode: 'cors'
     })
-    .then(r => r.json())
+    .then(r => {
+      if (!r.ok && r.status !== 404)
+        throw Error(r.statusText);
+
+      if(r.status === 404)
+        return ({});
+
+      return r.json();
+    })
     .then(response => setInfo(Object.assign(emptyInfo, response.data)))
-    .catch(() => setInfo(emptyInfo))
+    .catch((err) => {
+      setInfo(emptyInfo);
+      setError(err.message);
+    })
     .finally(() => setLoadingState(false));
   }, [info, contactKey, secret]);
 
   if (isLoading)
     return <div className="notice">Loading...</div>;
+
+  if (error)
+    return <div className="notice error">{error}</div>;
 
   if (!info || !info.contact)
     return <div className="notice">No record found.</div>;

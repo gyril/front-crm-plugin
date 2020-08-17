@@ -4,6 +4,7 @@ This project allows you to build a simple companion app for Front, that will dis
 ## Getting Started
 - Clone this repository.
 - From within the repository, run `yarn install`.
+- Edit `src/Config.js` and have it point to a server of your choice. See below for further explanation, and see [front-companion-server](https://github.com/gyril/front-companion-server) for a sample server implementation.
 - Run `yarn start` to run the app in the development mode.
 - Visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.
 - Add https://localhost:3000 as a plugin in your Front account, in dev mode.

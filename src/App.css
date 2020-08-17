@@ -24,6 +24,10 @@ a:hover {
   font-size: 12px;
 }
 
+.notice.error {
+  color: hsl(0, 50%, 50%);
+}
+
 .select-container {
   width: 100%;
   margin: 10px 0px;
