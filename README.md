@@ -1,6 +1,16 @@
 ## What is this?
 This project allows you to build a simple companion app for Front, that will display data based on the recipient of the message that is currently in view in Front.
 
+## Getting Started
+- Clone this repository
+- From within the repository, run `yarn install`
+- Run `yarn start` to run the app in the development mode
+- Visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.
+- Add https://localhost:3000 as a plugin in your Front account, in dev mode.
+
+The plugin will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
 ## How to use it
 This app creates a bridge between a conversation displayed in Front and a contact record that you keep in a separate system.<br />
 Every time the selected conversation changes in Front, a `GET` call will be made to the following URL: `https://your.api.domain/your_uri?auth_secret=APP_SECRET&contact_key=CONTACT_KEY`
@@ -39,18 +49,7 @@ The `data` Arrays of `contact` and `account` are optional. Their available `Type
 - `badge`: `TypeValue` can be any object that can be cast to a string. It will displayed in a badge format.
 - `string`: `TypeValue` can be any object that can be cast to a string.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.<br />
-Add https://localhost:3000 as a dev plugin in your Front account.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Building and deploying
 
 ### `yarn build`
 
@@ -58,6 +57,6 @@ Once you're ready to deploy your app, use `yarn build` to build the app for prod
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Your app is ready to be deployed! Serve it over HTTPS and add its URL as a plugin in your Front account, and you should be all set.
 
-**Do not forget to edit `src/Config.js` with your production API endpoint.
+**Do not forget to edit `src/Config.js` with your production API endpoint.**
