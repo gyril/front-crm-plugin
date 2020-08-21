@@ -26,9 +26,9 @@ const Application = () => {
   }, [frontContext, conversation]);
 
   return <div className="app">
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
-        <Route exact path="/">
+        <Route path="/">
           { (type === 'singleConversation' && currentContact) ? (
             <>
               <ContactsDropdown contacts={contacts} currentContact={currentContact} setContact={setCurrentContact} />

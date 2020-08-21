@@ -5,7 +5,7 @@ import DataElement from './DataElement';
 import { API_ENDPOINT } from './Config';
 
 const Info = ({ contactKey }) => {
-  const { secret } = useStoreState();
+  const { secret, endpoint } = useStoreState();
 
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
@@ -15,7 +15,7 @@ const Info = ({ contactKey }) => {
     if (info.contactKey === contactKey)
       return;
   
-    const uri = `${API_ENDPOINT}?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
+    const uri = `${endpoint || API_ENDPOINT}?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
     const emptyInfo = {contactKey: contactKey};
 
     setLoadingState(true);
@@ -40,7 +40,7 @@ const Info = ({ contactKey }) => {
       setError(err.message);
     })
     .finally(() => setLoadingState(false));
-  }, [info, contactKey, secret]);
+  }, [info, contactKey, secret, endpoint]);
 
   if (isLoading)
     return <div className="notice">Loading...</div>;

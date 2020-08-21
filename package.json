@@ -2,7 +2,9 @@
   "name": "front-companion",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/companion-plugin.web.front.app/",
   "dependencies": {
+    "@frontapp/plugin-sdk": "^1.0.1",
     "luxon": "^1.24.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
