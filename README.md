@@ -7,13 +7,13 @@ This project demonstrates how to build a simple companion app for Front, that wi
 This project uses an Airtable database (or "base") to demonstrate the possibilities of creating a plugin between Front and an external system. Follow these steps to create a base that is compatible with this project:
 - Create an Airtable account.
 - Open [this base](https://airtable.com/shrsvAFoN10mASCl0/tbldRw3cOpvbSRwhg/viwUjDGw3BTVUeJNi?blocks=bipzrtMrMP3Pbr7vF).
-- On the top-right corner, click "Copy base".
-- Find your Airtable API key (in your settings) and your Airtable base ID (which starts with `app`): you will need to add them to your environment variables.
+- In the top-right corner, click "Copy base".
 
 ## Quick start
 - Clone this repository.
 - From within the repository, run `yarn install`.
-- Make a copy of the `.env.sample` file and rename it `.env`. Update the `AIRTABLE_BASE` and `AIRTABLE_KEY` values from the pre-requisite section.
+- Make a copy of the `.env.sample` file and rename it `.env`. 
+- Find your Airtable key and Airtable base ID [here](https://airtable.com/api) and update the `AIRTABLE_BASE` and `AIRTABLE_KEY` values in the `.env` file.
 - Run `yarn dev` to run the app in development mode.
 - Open a browser and visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.
 - Open Front in the same browser as the above step, and add https://localhost:3000 as a plugin in your Front account, in dev mode.
