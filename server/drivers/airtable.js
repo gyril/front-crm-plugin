@@ -1,18 +1,19 @@
 const Airtable = require('airtable');
 
-Airtable.configure({
+const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
+
+  Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
-    apiKey: process.env.AIRTABLE_KEY
-});
+    apiKey: airtableKey || process.env.AIRTABLE_KEY
+  });
 
-const base = Airtable.base(process.env.AIRTABLE_BASE);
+  const base = Airtable.base(airtableBase || process.env.AIRTABLE_BASE);
 
-const getDataForContact = async (key) => {
   // From the "Contacts" base, find the record associated with this contact key
   return base('Contacts')
     .select({
       maxRecords: 1,
-      filterByFormula: `Email="${key}"`
+      filterByFormula: `Email="${contactKey}"`
     })
     .firstPage()
     .then((records) => {

@@ -4,7 +4,7 @@ import { FrontLink, FrontCompose } from './FrontActions';
 import DataElement from './DataElement';
 
 const Info = ({ contactKey }) => {
-  const { secret } = useStoreState();
+  const { secret, airtableKey, airtableBase } = useStoreState();
 
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
@@ -15,12 +15,14 @@ const Info = ({ contactKey }) => {
       return;
   
     const uri = `/api/search?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
+    // For the hosted version, we pass the Airtable credentials to the server
+    const withAirtableCredentials = (airtableKey && airtableBase) ? `&airtable_key=${airtableKey}&airtable_base=${airtableBase}` : '';
     const emptyInfo = {contactKey: contactKey};
 
     setLoadingState(true);
     setError(null);
 
-    fetch(`${uri}`, {
+    fetch(`${uri}${withAirtableCredentials}`, {
       method: 'GET',
       mode: 'cors'
     })
@@ -39,7 +41,7 @@ const Info = ({ contactKey }) => {
       setError(err.message);
     })
     .finally(() => setLoadingState(false));
-  }, [info, contactKey, secret]);
+  }, [info, contactKey, secret, airtableKey, airtableBase]);
 
   if (isLoading)
     return <div className="notice">Loading...</div>;
