@@ -16,7 +16,7 @@ app.use(express.static(`${__dirname}/build/`));
 // This is the endpoint that Front will call upon selection of a conversation
 app.get('/api/search', async (req, res) => {
   // Deny requests that do not come from Front
-  if (AUTH_SECRET !== '' && req.query.auth_secret !== AUTH_SECRET)
+  if (AUTH_SECRET && req.query.auth_secret !== AUTH_SECRET)
     return res.sendStatus(401);
 
   // Deny requests that are malformed
