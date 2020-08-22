@@ -9,6 +9,8 @@ This project uses an Airtable database (or "base") to demonstrate the possibilit
 - Open [this base](https://airtable.com/shrsvAFoN10mASCl0/tbldRw3cOpvbSRwhg/viwUjDGw3BTVUeJNi?blocks=bipzrtMrMP3Pbr7vF).
 - In the top-right corner, click "Copy base".
 
+![Excerpt of the Airtable base](/airtable.png)
+
 ## Quick start
 - Clone this repository.
 - From within the repository, run `yarn install`.
