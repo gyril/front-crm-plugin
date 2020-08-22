@@ -12,7 +12,7 @@ This project uses an Airtable database (or "base") to demonstrate the possibilit
 ![Excerpt of the Airtable base](/airtable.png)
 
 ## Super quick start
-A hosted version of this plugin is mode available for testing purposes. Add the following plugin to your Front account and you'll be able to test the plugin with your own Airtable data: `https://airtable-companion.front.solutions/?airtable_key=YOUR_AIRTABLE_KEY&airtable_base=YOUR_AIRTABLE_BASE_ID`.
+A hosted version of this plugin is mode available for testing purposes. Add the following plugin to your Front account and you'll be able to test the plugin with your own Airtable data: `https://front-companion.herokuapp.com/?airtable_key=YOUR_AIRTABLE_KEY&airtable_base=YOUR_AIRTABLE_BASE_ID`.
 Once you've confirmed that the plugin code works with your Airtable base, you can download the source code and edit it to suit your needs.
 
 ## Quick start
