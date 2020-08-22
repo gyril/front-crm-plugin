@@ -18,7 +18,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "HTTPS=true react-scripts start",
+    "start": "HTTPS=true PORT=3000 react-scripts start",
     "server": "node-env-run server --exec nodemon | pino-colada",
     "dev": "run-p server start",
     "build": "react-scripts build && rm -rf ./server/build/* && rsync -av build/ ./server/build/",

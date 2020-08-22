@@ -3,7 +3,7 @@ const AUTH_SECRET = process.env.AUTH_SECRET;
 const driver = require(`./drivers/${process.env.DRIVER}`);
 const express = require('express');
 const app = express();
-const port = process.env.SERVER_PORT || 9070;
+const port = process.env.PORT || 9070;
 
 // Utility function so that a Promise returns an Array of [err, result]
 const to = promise => promise.then(data => {
