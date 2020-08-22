@@ -15,7 +15,7 @@ This project uses an Airtable database (or "base") to demonstrate the possibilit
 - Clone this repository.
 - From within the repository, run `yarn install`.
 - Make a copy of the `.env.sample` file and rename it `.env`. 
-- Find your Airtable key and Airtable base ID [here](https://airtable.com/api) and update the `AIRTABLE_BASE` and `AIRTABLE_KEY` values in the `.env` file.
+- Find your Airtable key and Airtable base ID [here](https://airtable.com/api) and update the `AIRTABLE_KEY` and `AIRTABLE_BASE` values in the `.env` file.
 - Run `yarn dev` to run the app in development mode.
 - Open a browser and visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.
 - Open Front in the same browser as the above step, and add https://localhost:3000 as a plugin in your Front account, in dev mode.
