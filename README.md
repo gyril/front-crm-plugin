@@ -3,37 +3,35 @@ This project demonstrates how to build a simple companion app for Front, that wi
 
 ![Image of the plugin](/screenshot.png)
 
-## Getting Started (using the hosted version)
-We're making available a hosted version of this repository. You won't be able to edit its code, which will remain the same as this repository's master branch, but you can use it to test your backend server. To use the hosted version, add the following URL as a plugin in Front:
-https://companion-plugin.web.front.app/endpoint=ENDPOINT_URL.
+## Pre-requisite
+This project uses an Airtable database (or "base") to demonstrate the possibilities of creating a plugin between Front and an external system. Follow these steps to create a base that is compatible with this project:
+- Create an Airtable account.
+- Open [this base](https://airtable.com/shrsvAFoN10mASCl0/tbldRw3cOpvbSRwhg/viwUjDGw3BTVUeJNi?blocks=bipzrtMrMP3Pbr7vF).
+- On the top-right corner, click "Copy base".
+- Find your Airtable API key (in your settings) and your Airtable base ID (which starts with `app`): you will need to add them to your environment variables.
 
-Replace `ENDPOINT_URL` with the **URI-encoded** endpoint of your server (you can use the handy Javascript `encodeURIComponent` to encode it). For example, to use the hosted version with our sample Airtable server, you would add: `https://companion-plugin.web.front.app/?endpoint=https%3A%2F%2Fairtable-companion-server.front.solutions` as a plugin in Front.
-
-## Getting Started (locally)
-
-### Serving the plugin files locally
+## Quick start
 - Clone this repository.
 - From within the repository, run `yarn install`.
-- Edit `src/Config.js` and have it point to a server of your choice. See below for further explanation, and see [front-companion-server](https://github.com/gyril/front-companion-server) for a sample server implementation.
-- Run `yarn start` to run the app in the development mode.
-
-### Adding the plugin to Front
-Note: because plugins must be served over HTTPS, when developing locally it's easier to do everything in the web app. Once your plugin is ready for production, it will work in the exact same way in the desktop app as it does in the web app.
-
+- Make a copy of the `.env.sample` file and rename it `.env`. Update the `AIRTABLE_BASE` and `AIRTABLE_KEY` values from the pre-requisite section.
+- Run `yarn dev` to run the app in development mode.
 - Open a browser and visit [https://localhost:3000](https://localhost:3000) to accept the unsafe HTTPS connection.
 - Open Front in the same browser as the above step, and add https://localhost:3000 as a plugin in your Front account, in dev mode.
+
+Note: because plugins must be served over HTTPS, when developing locally it's easier to do everything in the web app. Once your plugin is ready for production, it will work in the exact same way in the desktop app as it does in the web app.
 
 The plugin will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+## Dev commands
+The project is split into two pieces: a client serving the plugin files, and a minimalist server fetching data from an external system (in this case, the external system is Airtable).
+- `yarn start` will run the client code only.
+- `yarn server` will run the server code only.
+- `yarn dev` is a combination of both.
+
 ## How to use this project
-This plugin creates a bridge between a conversation displayed in Front, and a contact record that you keep in a separate system. Every time the selected conversation changes in Front, a `GET` call will be made to the following URL: `https://your.api.domain/your_uri?auth_secret=APP_SECRET&contact_key=CONTACT_KEY`
+This plugin creates a bridge between a conversation displayed in Front, and a contact record that you keep in a separate system. Every time the selected conversation changes in Front, a `GET` call will be issued by the client to the server. The client expects a response that should be valid JSON blob of the following structure:
 
-- `https://your.api.domain/your_uri` is the endpoint you will provide that will return the contact data. You can set it in the `src/Config.js` file.
-- `APP_SECRET` is the randomly-generated secret for your app. You will find it in the plugin's settings in Front. Use it to authenticate the call, and only reply when the secret sent matches the secret you should expect.
-- `CONTACT_KEY` is the key that identifies the contact displayed. For an email conversation, it will be an email address; for a Twitter conversation, a Twitter handle; for a text conversation, a phone number; etc.
-
-The expected response to this call should be valid JSON blob of the following structure:
 ```
 {
   "data":
@@ -62,15 +60,15 @@ The `data` Arrays of `contact` and `account` are optional. Their available `Type
 - `currency`: `TypeValue` can be any `Number`.
 - `badge`: `TypeValue` can be any object that can be cast to a string. It will displayed in a badge format.
 - `string`: `TypeValue` can be any object that can be cast to a string.
+- `list`: `TypeValue` must be an Array of Strings.
 
 ## Building and deploying
 
 ### `yarn build`
-
-Once you're ready to deploy your app, use `yarn build` to build the app for production. Production files will appear in the `build` folder.<br />
+Once you're ready to deploy your plugin, use `yarn build` to build the client code for production. Production files will appear in the `build` folder and copied to the `server/build`.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed! Serve it over HTTPS and add its URL as a plugin in your Front account, and you should be all set.
+The client build is minified and the filenames include the hashes.<br />
+The server is set to serve files from the `server/build` folder.
 
-**Do not forget to edit `src/Config.js` with your production API endpoint.**
+**To secure communication between Front and your plugin, do not forget to add your plugin's authentication secret as the `AUTH_SECRET` environment variable.**

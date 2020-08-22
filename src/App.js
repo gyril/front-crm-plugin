@@ -34,7 +34,7 @@ const Application = () => {
               <ContactsDropdown contacts={contacts} currentContact={currentContact} setContact={setCurrentContact} />
               <Info contactKey={currentContact} />
             </>
-          ) : undefined }
+          ) : <div className="notice">This plugin only works with conversations.</div> }
         </Route>
       </Switch>
     </Router>

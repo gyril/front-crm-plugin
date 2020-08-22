@@ -113,7 +113,6 @@ a:hover {
 }
 
 .list-data li .info-label, .list-data li .info-value {
-  width: 50%;
   font-size: 14px;
   line-height: 17px;
   font-weight: 300;
@@ -125,11 +124,13 @@ a:hover {
 
 .list-data li .info-entry > div:nth-child(1) {
   color: #19191A;
+  width: 40%;
 }
 
 .list-data li .info-entry > div:nth-child(2) {
   color: #9B9C9E;
   text-align: right;
+  width: 60%;
 }
 
 .data-badge {

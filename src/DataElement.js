@@ -32,6 +32,9 @@ const DataElement = ({ type, value }) => {
   if (type === 'currency')
     return <Currency value={value} />
 
+  if (type === 'list' && value.length > 0)
+    return <>{value.join(', ')}</>;
+
   return <>{value}</>;
 };
 

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useStoreState } from './Store';
 import { FrontLink, FrontCompose } from './FrontActions';
 import DataElement from './DataElement';
-import { API_ENDPOINT } from './Config';
 
 const Info = ({ contactKey }) => {
-  const { secret, endpoint } = useStoreState();
+  const { secret } = useStoreState();
 
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
@@ -15,7 +14,7 @@ const Info = ({ contactKey }) => {
     if (info.contactKey === contactKey)
       return;
   
-    const uri = `${endpoint || API_ENDPOINT}?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
+    const uri = `/api/search?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
     const emptyInfo = {contactKey: contactKey};
 
     setLoadingState(true);
@@ -40,7 +39,7 @@ const Info = ({ contactKey }) => {
       setError(err.message);
     })
     .finally(() => setLoadingState(false));
-  }, [info, contactKey, secret, endpoint]);
+  }, [info, contactKey, secret]);
 
   if (isLoading)
     return <div className="notice">Loading...</div>;
