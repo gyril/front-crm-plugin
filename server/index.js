@@ -10,9 +10,6 @@ const to = promise => promise.then(data => {
   return [null, data];
 }).catch(err => [err]);
 
-// Logging
-app.use(require('express-pino-logger')());
-
 // Static routes
 app.use(express.static(`${__dirname}/build/`));
 
@@ -36,7 +33,7 @@ app.get('/api/search', async (req, res) => {
     : await to(driver.getDataForContact(contactKey));
 
   if (err) {
-    req.log.error(err);
+    console.error(err);
 
     if (err.statusCode && err.message)
       return res.status(err.statusCode).send(err.message);
