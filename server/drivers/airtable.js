@@ -1,5 +1,20 @@
 const Airtable = require('airtable');
 
+// Edit this object to add or remove attributes displayed
+const fields = {
+  contact: [
+    {label: 'Title', type: 'string'},
+    {label: 'Role', type: 'list'},
+    {label: 'Phone', type: 'phone'}
+  ],
+  account: [
+    {label: 'Industry', type: 'string'},
+    {label: 'Contract Value', type: 'currency'},
+    {label: 'Renewal', type: 'date'},
+    {label: 'Segment', type: 'badge'}
+  ]
+};
+
 const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
 
   Airtable.configure({
@@ -24,11 +39,7 @@ const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
       const contactFields = records[0].fields;
 
       // List of fields we want to associate as Contact data
-      const contactFieldList = [
-        {label: 'Title', type: 'string'},
-        {label: 'Role', type: 'list'},
-        {label: 'Phone', type: 'phone'}
-      ];
+      const contactFieldList = fields['contact'];
 
       const data = {
         contact: {
@@ -53,12 +64,7 @@ const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
           const accountFields = record.fields;
 
           // List of fields we want to associate as Account data
-          const accountFieldList = [
-            {label: 'Industry', type: 'string'},
-            {label: 'Contract Value', type: 'currency'},
-            {label: 'Renewal', type: 'date'},
-            {label: 'Segment', type: 'badge'}
-          ];
+          const accountFieldList = fields['account'];
 
           data.account = {
             name: accountFields['Company'],

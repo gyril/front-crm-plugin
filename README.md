@@ -1,5 +1,5 @@
 ## What is this?
-This project demonstrates how to build a simple companion app for Front, that will display data based on the recipient of the message that is currently in view in Front.
+This project demonstrates how to build a simple companion app for Front, that will display contact data based on the recipient of the message that is currently in view in Front.
 
 ![Image of the plugin](/screenshot.png)
 
@@ -14,7 +14,7 @@ This project uses an Airtable database (or "base") to demonstrate the possibilit
 ## Super quick start
 A hosted version of this plugin is made available for testing purposes.<br />
 To test the plugin with your own Airtable data, add the following URL as a plugin in your Front account:<br />
-`https://front-companion.herokuapp.com/?airtable_key=YOUR_AIRTABLE_KEY&airtable_base=YOUR_AIRTABLE_BASE_ID`
+`https://front-crm-plugin.herokuapp.com/?airtable_key=YOUR_AIRTABLE_KEY&airtable_base=YOUR_AIRTABLE_BASE_ID`
 
 Once you've confirmed that the plugin code works with your Airtable base, you can download the source code and edit it to suit your needs.
 

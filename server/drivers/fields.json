@@ -1,0 +1,13 @@
+{
+  "contact": [
+    {"label": "Title", "type": "string"},
+    {"label": "Role", "type": "list"},
+    {"label": "Phone", "type": "phone"}
+  ],
+  "account": [
+    {"label": "Industry", "type": "string"},
+    {"label": "Contract Value", "type": "currency"},
+    {"label": "Renewal", "type": "date"},
+    {"label": "Segment", "type": "badge"}
+  ]
+}
