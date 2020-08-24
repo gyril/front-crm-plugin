@@ -7,7 +7,7 @@ This project demonstrates how to build a simple companion app for Front, that wi
 
 ## Pre-requisite
 This project uses an Airtable database (or "base") to demonstrate the possibilities of creating a plugin between Front and an external system. Follow these steps to create a base that is compatible with this project:
-- Create an Airtable account.
+- Create an [Airtable account](https://airtable.com/signup).
 - Open [this base](https://airtable.com/shrsvAFoN10mASCl0/tbldRw3cOpvbSRwhg/viwUjDGw3BTVUeJNi?blocks=bipzrtMrMP3Pbr7vF).
 - In the top-right corner, click "Copy base".
 
