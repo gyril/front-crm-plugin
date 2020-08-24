@@ -1,3 +1,5 @@
+# Front CRM Plugin
+
 ## What is this?
 This project demonstrates how to build a simple companion app for Front, that will display contact data based on the recipient of the message that is currently in view in Front.
 
