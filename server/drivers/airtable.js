@@ -16,7 +16,6 @@ const fields = {
 };
 
 const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
-
   Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
     apiKey: airtableKey || process.env.AIRTABLE_KEY

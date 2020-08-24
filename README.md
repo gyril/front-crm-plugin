@@ -41,7 +41,7 @@ The project is split into two pieces: a client serving the plugin files, and a m
 - `yarn dev` is a combination of both.
 
 ## How to use this project
-This plugin creates a bridge between a conversation displayed in Front, and a contact record that you keep in a separate system. Every time the selected conversation changes in Front, a `GET` call will be issued by the client to the server. The client expects a response that should be valid JSON blob of the following structure:
+This plugin creates a bridge between a conversation displayed in Front, and a contact record that you keep in a separate system. Every time the selected conversation changes in Front, a `GET` call will be issued by the client to the server. The client expects a response that should be a valid JSON blob of the following structure:
 
 ```
 {
@@ -72,6 +72,8 @@ The `data` Arrays of `contact` and `account` are optional. Their available `Type
 - `badge`: `TypeValue` can be any object that can be cast to a string. It will displayed in a badge format.
 - `string`: `TypeValue` can be any object that can be cast to a string.
 - `list`: `TypeValue` must be an Array of Strings.
+
+Edit the `server/drivers/airtable.js` file to make changes to the data fetched from Airtable and displayed in Front, or write a new driver that works with the system of record of ytour choice. As long as it implements a `getDataForContact` method that returns a valid blob, the data will be displayed by the plugin.
 
 ## Building and deploying
 
