@@ -69,11 +69,11 @@ The `data` Arrays of `contact` and `account` are optional. Their available `Type
 - `phone`: `TypeValue` must be a `Number` that is E.164-compliant.
 - `date`: `TypeValue` must be an ISO-formatted date string.
 - `currency`: `TypeValue` can be any `Number`.
-- `badge`: `TypeValue` can be any object that can be cast to a string. It will displayed in a badge format.
+- `badge`: `TypeValue` can be any object that can be cast to a string. It will be displayed in a badge format.
 - `string`: `TypeValue` can be any object that can be cast to a string.
 - `list`: `TypeValue` must be an Array of Strings.
 
-Edit the `server/drivers/airtable.js` file to make changes to the data fetched from Airtable and displayed in Front, or write a new driver that works with the system of record of ytour choice. As long as it implements a `getDataForContact` method that returns a valid blob, the data will be displayed by the plugin.
+Edit the `server/drivers/airtable.js` file to make changes to the data fetched from Airtable and displayed in Front, or write a new driver that works with the system of record of your choice. As long as it implements a `getDataForContact` method that returns a valid blob, the data will be displayed by the plugin.
 
 ## Building and deploying
 
