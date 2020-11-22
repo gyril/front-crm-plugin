@@ -24,13 +24,13 @@ const Badge = ({ value }) => <span className="data-badge">{value}</span>;
 
 const DataElement = ({ type, value }) => {
   if (type === 'date')
-    return <Date value={value} />
+    return <Date value={value} />;
 
   if (type === 'badge')
-    return <Badge value={value} />
+    return <Badge value={value} />;
   
   if (type === 'currency')
-    return <Currency value={value} />
+    return <Currency value={value} />;
 
   if (type === 'list' && value.length > 0)
     return <>{value.join(', ')}</>;
