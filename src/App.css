@@ -90,11 +90,6 @@ a:hover {
   font-weight: bold;
 }
 
-.data-title {
-  font-size: 14px;
-  font-weight: bold;
-}
-
 .list-data {
   list-style: none;
   margin: 10px 0px;
@@ -102,14 +97,7 @@ a:hover {
 }
 
 .list-data li {
-  display: flex;
-  border-bottom: 1px solid #F3F4F6;
-}
-
-.list-data li .info-entry {
-  display: flex;
-  width: 100%;
-  padding: 2px;
+  padding: 4px 0px;
 }
 
 .list-data li .info-label, .list-data li .info-value {
@@ -117,20 +105,23 @@ a:hover {
   line-height: 17px;
   font-weight: 300;
   letter-spacing: -0.15px;
-  white-space: nowrap;
+}
+
+.list-data li .info-value p {
+  margin: 0px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .list-data li .info-entry > div:nth-child(1) {
-  color: #19191A;
-  width: 40%;
+  color: #5a5a5a;
+  font-weight: bold;
 }
 
 .list-data li .info-entry > div:nth-child(2) {
-  color: #9B9C9E;
-  text-align: right;
-  width: 60%;
+  color: #19191A;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .data-badge {

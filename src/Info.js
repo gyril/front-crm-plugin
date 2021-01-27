@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useStoreState } from './Store';
-import { FrontLink, FrontCompose } from './FrontActions';
 import DataElement from './DataElement';
 
 const Info = ({ contactKey }) => {
-  const { secret, airtableKey, airtableBase } = useStoreState();
+  const { secret } = useStoreState();
 
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
@@ -15,14 +14,12 @@ const Info = ({ contactKey }) => {
       return;
   
     const uri = `/api/search?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
-    // For the hosted version, we pass the Airtable credentials to the server
-    const withAirtableCredentials = (airtableKey && airtableBase) ? `&airtable_key=${airtableKey}&airtable_base=${airtableBase}` : '';
     const emptyInfo = {contactKey: contactKey};
 
     setLoadingState(true);
     setError(null);
 
-    fetch(`${uri}${withAirtableCredentials}`, {
+    fetch(`${uri}`, {
       method: 'GET',
       mode: 'cors'
     })
@@ -35,13 +32,13 @@ const Info = ({ contactKey }) => {
 
       return r.json();
     })
-    .then(response => setInfo(Object.assign(emptyInfo, response.data)))
+    .then(response => setInfo(Object.assign(emptyInfo, {data: response.data})))
     .catch((err) => {
       setInfo(emptyInfo);
       setError(err.message);
     })
     .finally(() => setLoadingState(false));
-  }, [info, contactKey, secret, airtableKey, airtableBase]);
+  }, [info, contactKey, secret]);
 
   if (isLoading)
     return <div className="notice">Loading...</div>;
@@ -49,47 +46,20 @@ const Info = ({ contactKey }) => {
   if (error)
     return <div className="notice error">{error}</div>;
 
-  if (!info || !info.contact)
+  if (!info || !info.data)
     return <div className="notice">No record found.</div>;
 
   return (
     <div className="info">
-      <div className="info-card">
-        <div className="info-card-contact">{info.contact?.name}</div>
-        <div><FrontCompose to={info.contact?.email} label={info.contact?.email} /></div>
-        { info.account ? (
-          <div className="info-card-account"><FrontLink href={info.account.url} label={info.account.name} /></div>
-        ) : undefined }
-      </div>
       <div className="info-contact">
-        { info.contact?.data ? (
-          <>
-            <div className="data-title">Contact info</div>
-            <ul className="list-data">
-              {info.contact.data.map((e, idx) => <li key={idx}>
-                <div className="info-entry">
-                  <div className="info-label">{e.label}</div>
-                  <div className="info-value"><DataElement type={e.type} value={e.value} /></div>
-                </div>
-              </li>)}
-            </ul>
-          </>
-        ) : undefined }
-      </div>
-      <div className="info-account">
-        { info.account?.data ? (
-            <>
-              <div className="data-title">Account info</div>
-              <ul className="list-data">
-               {info.account.data.map((e, idx) => <li key={idx}>
-                  <div className="info-entry">
-                    <div className="info-label">{e.label}</div>
-                    <div className="info-value"><DataElement type={e.type} value={e.value} /></div>
-                  </div>
-                </li>)}
-              </ul>
-            </>
-          ) : undefined }
+        <ul className="list-data">
+          {Object.entries(info.data).map((e, idx) => <li key={idx}>
+            <div className="info-entry">
+              <div className="info-label">{e[0]}</div>
+              <div className="info-value"><DataElement value={e[1]} /></div>
+            </div>
+          </li>)}
+        </ul>
       </div>
     </div>
   );

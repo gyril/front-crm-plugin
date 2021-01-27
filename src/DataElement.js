@@ -1,7 +1,7 @@
 import React from 'react';
 import { DateTime } from 'luxon';
 
-const Date = ({ value }) => { 
+const DateElement = ({ value }) => { 
   const parsedDate = DateTime.fromISO(value);
 
   if (parsedDate.invalid)
@@ -10,32 +10,17 @@ const Date = ({ value }) => {
   return parsedDate.toFormat('D');
 };
 
-const Currency = ({ value }) => {
-  const amount = Number(value); 
-  const amountString = amount < 1000 ?
-    amount.toFixed(0) :
-    amount < 1000000 ?
-      `${Math.round(amount / 10) / 100}k` :
-      `${Math.round(amount / 10000) / 100}m`;
-  return <span>${amountString}</span>;
-};
+const DataElement = ({ value }) => {
+  if (new Date(value).toString() !== 'Invalid Date' && new Date(value).toISOString() === value)
+    return <DateElement value={value} />;
 
-const Badge = ({ value }) => <span className="data-badge">{value}</span>;
+  if (Array.isArray(value) && !value.find(e => !!e))
+    return <>N/A</>;
 
-const DataElement = ({ type, value }) => {
-  if (type === 'date')
-    return <Date value={value} />;
-
-  if (type === 'badge')
-    return <Badge value={value} />;
-  
-  if (type === 'currency')
-    return <Currency value={value} />;
-
-  if (type === 'list' && value.length > 0)
+  if (Array.isArray(value))
     return <>{value.join(', ')}</>;
-
-  return <>{value}</>;
+  
+  return <>{value || 'N/A'}</>;
 };
 
 export default DataElement;
