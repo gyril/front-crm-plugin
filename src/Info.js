@@ -8,6 +8,18 @@ const Info = ({ contactKey }) => {
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
   const [error, setError] = useState(null);
+  const [index, setIndex] = useState(0);
+
+  const changeIndex = (change, length) => {
+    let newIndex = index + change;
+    if (newIndex === -1)
+      newIndex = length - 1;
+
+    if (newIndex === length)
+      newIndex = 0;
+
+    return setIndex(newIndex);
+  };
 
   useEffect(() => {
     if (info.contactKey === contactKey)
@@ -18,6 +30,7 @@ const Info = ({ contactKey }) => {
 
     setLoadingState(true);
     setError(null);
+    setIndex(0);
 
     fetch(`${uri}`, {
       method: 'GET',
@@ -53,7 +66,12 @@ const Info = ({ contactKey }) => {
     <div className="info">
       <div className="info-contact">
         <ul className="list-data">
-          {Object.entries(info.data).map((e, idx) => <li key={idx}>
+          <div className="index-picker">
+            <span className="index-picker-button" onClick={() => changeIndex(-1, info.data.length)}>&lt;&lt;</span>
+            <span> {index + 1} / {info.data.length} </span>
+            <span className="index-picker-button" onClick={() => changeIndex(1, info.data.length)}>&gt;&gt;</span>
+          </div>
+          {Object.entries(info.data[index]).map((e, idx) => <li key={idx}>
             <div className="info-entry">
               <div className="info-label">{e[0]}</div>
               <div className="info-value"><DataElement value={e[1]} /></div>

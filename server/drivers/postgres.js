@@ -70,7 +70,6 @@ const query = `select  \n
   group by w."id", w."firstName", w."lastName", ihw."institution", i."name", ihw."isDeletedFromNetwork", ihw."deletedBy", ihw."isWorkerNotified",ihw."deletedAt", \n
   t."isDay",t."isNight",ihw."updatedAt",ihw."acceptedBy", ihw.statut, i_h_w_h_info."value" \n
  \n
-  limit 1 \n
 `;
 
 const getDataForContact = async (contactEmail) => {
@@ -79,7 +78,7 @@ const getDataForContact = async (contactEmail) => {
 
   try {
     const res = await client.query(query, [contactEmail]);
-    data = res.rows[0] || null;
+    data = res.rows.length === 0 ? null : res.rows;
   } finally {
     // Make sure to release the client before any error handling,
     // just in case the error handling itself throws an error.
