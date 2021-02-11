@@ -18,3 +18,5 @@ The project is split into two pieces: a client serving the plugin files, and a m
 - `yarn start` will run the client code only.
 - `yarn server` will run the server code only.
 - `yarn dev` is a combination of both.
+
+If you change the front-end code (a.k.a. the React app), you should build the app with `yarn build` before deploying.
