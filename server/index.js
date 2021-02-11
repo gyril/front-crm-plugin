@@ -24,13 +24,7 @@ app.get('/api/search', async (req, res) => {
     return res.sendStatus(404);
 
   const contactKey = req.query.contact_key;
-
-  // For the hosted version, we allow the client to pass credentials for Airtable
-  const airtableKey = req.query.airtable_key;
-  const airtableBase = req.query.airtable_base;
-  const [err, contactData] = (process.env.DRIVER === 'airtable' && airtableKey && airtableBase)
-    ? await to(driver.getDataForContact(contactKey, airtableKey, airtableBase))
-    : await to(driver.getDataForContact(contactKey));
+  const [err, contactData] = await to(driver.getDataForContact(contactKey))
 
   if (err) {
     console.error(err);

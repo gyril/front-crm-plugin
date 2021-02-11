@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@frontapp/plugin-sdk": "^1.0.1",
-    "airtable": "^0.9.0",
     "express": "^4.17.1",
     "luxon": "^1.24.1",
     "node-env-run": "^4.0.1",

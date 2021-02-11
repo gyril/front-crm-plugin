@@ -19,13 +19,6 @@ const stateReducer = (oldState, action) => {
   if (action.type === 'secret_set')
     return {...oldState, secret: action.value};
 
-  if (action.type === 'airtable_credentials_set')
-    return {
-      ...oldState,
-      airtableKey: action.value.airtable_key,
-      airtableBase: action.value.airtable_base
-    };
-
   if (action.type === 'new_context_received')
     return {...oldState, frontContext: action.value};
 
@@ -41,13 +34,6 @@ export default ({ children }) => {
     console.log(`Secret is ${secret}`);
 
     dispatch({type: 'secret_set', value: secret});
-
-    // In the hosted version, users can provide their own Airtable key and base ID
-    const airtable_key = (new URL(document.location.href)).searchParams.get('airtable_key');
-    const airtable_base = (new URL(document.location.href)).searchParams.get('airtable_base');
-
-    if (airtable_key && airtable_base)
-      dispatch({type: 'airtable_credentials_set', value: {airtable_key, airtable_base}});
 
     const subscription = contextUpdates.subscribe(newContext => dispatch({type: 'new_context_received', value: newContext}));
     return () => subscription.unsubscribe();
