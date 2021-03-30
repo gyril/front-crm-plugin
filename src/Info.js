@@ -13,6 +13,9 @@ const Info = ({ contactKey }) => {
   useEffect(() => {
     if (info.contactKey === contactKey)
       return;
+
+    console.log('contact key here');
+    console.log(contactKey);
   
     const uri = `/api/search?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
     // For the hosted version, we pass the Airtable credentials to the server
@@ -52,6 +55,27 @@ const Info = ({ contactKey }) => {
   if (!info || !info.contact)
     return <div className="notice">No record found.</div>;
 
+  console.log('info is here');
+  console.log(info);
+
+  // BORROWER PROFILE
+  // loan id
+  // phone
+  // address
+  // social
+  // Current status
+
+  // LOAN TEAM
+  // Loan consultant associate
+  // Loan consultant
+
+  // REQUIRED INFORMATION
+  // Mortgage application
+  // Credit verification
+  // Income verification
+  // Assets & debts
+  // ID records
+
   return (
     <div className="info">
       <div className="info-card">
@@ -64,7 +88,7 @@ const Info = ({ contactKey }) => {
       <div className="info-contact">
         { info.contact?.data ? (
           <>
-            <div className="data-title">Contact info</div>
+            <div className="data-title">Borrower profile</div>
             <ul className="list-data">
               {info.contact.data.map((e, idx) => <li key={idx}>
                 <div className="info-entry">
@@ -79,7 +103,7 @@ const Info = ({ contactKey }) => {
       <div className="info-account">
         { info.account?.data ? (
             <>
-              <div className="data-title">Account info</div>
+              <div className="data-title">Loan team</div>
               <ul className="list-data">
                {info.account.data.map((e, idx) => <li key={idx}>
                   <div className="info-entry">

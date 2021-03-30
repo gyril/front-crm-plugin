@@ -3,15 +3,19 @@ const Airtable = require('airtable');
 // Edit this object to add or remove attributes displayed
 const fields = {
   contact: [
-    {label: 'Title', type: 'string'},
-    {label: 'Role', type: 'list'},
-    {label: 'Phone', type: 'phone'}
+    {label: 'Phone', type: 'phone'},
+    {label: 'Loan ID', type: 'string'},
+    {label: 'Address', type: 'string'},
+    {label: 'Social security', type: 'string'},
+    {label: 'Mortgage application', type: 'boolean'},
+    {label: 'Credit verification', type: 'boolean'},
+    {label: 'Income verification', type: 'boolean'},
+    {label: 'Assets & debt', type: 'boolean'},
+    {label: 'ID records', type: 'boolean'},
   ],
   account: [
-    {label: 'Industry', type: 'string'},
-    {label: 'Contract Value', type: 'currency'},
-    {label: 'Renewal', type: 'date'},
-    {label: 'Segment', type: 'badge'}
+    {label: 'Loan consultant associate', type: 'string'},
+    {label: 'Loan consultant', type: 'currency'}
   ]
 };
 
@@ -40,37 +44,39 @@ const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
       // List of fields we want to associate as Contact data
       const contactFieldList = fields['contact'];
 
+      console.log('data is really here');
+      console.log(contactFields);
       const data = {
         contact: {
           name: contactFields['Full Name'],
           email: contactFields['Email'],
           data: contactFieldList
             .map(f => ({type: f.type, label: f.label, value: contactFields[f.label]}))
-            .filter(f => typeof f.value !== 'undefined')
         }
       };
 
-      // If there's no Company data, return Contact data only
-      if (!contactFields['Company'] || contactFields['Company'].length === 0)
+      // If there's no  Loan data, return Contact data only
+      if (!contactFields['Loan'] || contactFields['Loan'].length === 0)
         return data;
 
-      const accountId = contactFields['Company'][0];
+      const loanId = contactFields['Loan'][0];
       
-      // From the "Companies" base, find the record associated with this accountId
-      return base('Companies')
-        .find(accountId)
+      // From the "Loans" base, find the record associated with this loanId
+      return base('Loans')
+        .find(loanId)
         .then((record) => {
+          console.log('loan record is here');
+          console.log(record);
           const accountFields = record.fields;
 
           // List of fields we want to associate as Account data
           const accountFieldList = fields['account'];
 
           data.account = {
-            name: accountFields['Company'],
+            name: accountFields['Loan'],
             url: accountFields['Website'],
             data: accountFieldList
               .map(f => ({type: f.type, label: f.label, value: accountFields[f.label]}))
-              .filter(f => typeof f.value !== 'undefined')
           };
 
           // Return Contact and Account data

@@ -32,7 +32,7 @@ const Application = () => {
           { (type === 'singleConversation' && currentContact) ? (
             <>
               <ContactsDropdown contacts={contacts} currentContact={currentContact} setContact={setCurrentContact} />
-              <Info contactKey={currentContact} />
+              <Info contactKey="lsmithbetter@gmail.com" />
             </>
           ) : <div className="notice">This plugin only works with conversations.</div> }
         </Route>
