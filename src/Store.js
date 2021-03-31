@@ -26,11 +26,8 @@ const stateReducer = (oldState, action) => {
       airtableBase: action.value.airtable_base
     };
 
-  if (action.type === 'new_context_received') {
-    console.log('new context received');
-    console.log(action.value);
+  if (action.type === 'new_context_received')
     return {...oldState, frontContext: action.value};
-  }
 
   return oldState;
 };

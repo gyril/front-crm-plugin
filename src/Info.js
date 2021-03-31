@@ -66,25 +66,6 @@ const Info = ({ contactKey, applyTag, currentTags }) => {
 
   if (!info || !info.contact)
     return <div className="notice">No record found.</div>;
-
-  // BORROWER PROFILE
-  // loan id
-  // phone
-  // address
-  // social
-  // Current status
-
-  // LOAN TEAM
-  // Loan consultant associate
-  // Loan consultant
-
-  // REQUIRED INFORMATION
-  // Mortgage application
-  // Credit verification
-  // Income verification
-  // Assets & debts
-  // ID records
-
   
   const metadataValues = info.contact?.data.filter(e => e.type !== 'boolean');
   const booleanRecords = info.contact?.data.filter(e => e.type === 'boolean');
@@ -166,9 +147,6 @@ const Info = ({ contactKey, applyTag, currentTags }) => {
 
               if (e.target.value === 'Pre-lock')
                 applyTag(preLockTagId);
-
-              console.log('new info here');
-              console.log(newInfo);
 
               return setInfo(newInfo);
             }}

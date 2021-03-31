@@ -45,8 +45,6 @@ const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
       // List of fields we want to associate as Contact data
       const contactFieldList = fields['contact'];
 
-      console.log('data is really here');
-      console.log(contactFields);
       const data = {
         contact: {
           name: contactFields['Full Name'],
