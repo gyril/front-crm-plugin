@@ -66,8 +66,6 @@ const getDataForContact = async (contactKey, airtableKey, airtableBase) => {
       return base('Loans')
         .find(loanId)
         .then((record) => {
-          console.log('loan record is here');
-          console.log(record);
           const accountFields = record.fields;
 
           // List of fields we want to associate as Account data

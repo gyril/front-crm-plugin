@@ -16,12 +16,14 @@ const statuses = [
 const preLockTagId = "tag_12za4t";
 const applicationTagId = "tag_12za6l";
 
-const Info = ({ contactKey, applyTag }) => {
+const Info = ({ contactKey, applyTag, currentTags }) => {
   const { secret, airtableKey, airtableBase } = useStoreState();
 
   const [isLoading, setLoadingState] = useState(true);
   const [info, setInfo] = useState({});
   const [error, setError] = useState(null);
+
+  const hasApplicationTag = currentTags.find(t => t.id === applicationTagId);
 
   useEffect(() => {
     if (info.contactKey === contactKey)
@@ -90,8 +92,6 @@ const Info = ({ contactKey, applyTag }) => {
   const accountRecords = info.account?.data.filter(r => r.label !== 'Status');
 
   const currentStatus = info.account?.data.find(r => r.label === 'Status');
-  console.log('current status here');
-  console.log(currentStatus);
 
   return (
     <div className="info">
@@ -139,7 +139,7 @@ const Info = ({ contactKey, applyTag }) => {
         <ul className="list-data">
           <select
             className="select-contact"
-            value={info.account?.data.find(r => r.label === 'Status').value}
+            value={hasApplicationTag ? 'Application' : currentStatus}
             onChange={(e) => {
               const newAccountData = info.account.data.map(r => {
                 if (r.label === 'Status')
