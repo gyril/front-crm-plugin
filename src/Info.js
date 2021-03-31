@@ -139,14 +139,20 @@ const Info = ({ contactKey, applyTag, currentTags }) => {
         <ul className="list-data">
           <select
             className="select-contact"
-            value={hasApplicationTag ? 'Application' : currentStatus}
+            value={hasApplicationTag ? 'Application' : currentStatus.value}
             onChange={(e) => {
               const newAccountData = info.account.data.map(r => {
                 if (r.label === 'Status')
                   return {
                     ...r,
                     value: e.target.value
-                  }
+                  };
+              
+                if (r.label === 'Loan consultant' && e.target.value === 'Pre-lock')
+                  return {
+                    ...r,
+                    value: 'Steve Hackney'
+                  };
                 
                 return r;
               });
