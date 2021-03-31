@@ -35,10 +35,11 @@ const DataElement = ({ type, value }) => {
   if (type === 'list' && value.length > 0)
     return <>{value.join(', ')}</>;
 
-  if (type === 'boolean')
-    return <input type="checkbox" value={value} />
+  if (type === 'boolean') {
+    return <input type="checkbox" checked={Boolean(value)} readOnly />
+  }
 
-  return <>{value}</>;
+  return <>{value || ''}</>;
 };
 
 export default DataElement;

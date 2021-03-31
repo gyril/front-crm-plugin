@@ -3,7 +3,20 @@ import { useStoreState } from './Store';
 import { FrontLink, FrontCompose } from './FrontActions';
 import DataElement from './DataElement';
 
-const Info = ({ contactKey }) => {
+const statuses = [
+  "Pre-approval",
+  "Pre-lock",
+  "Application",
+  "Initial Processing",
+  "Conditional approval",
+  "Closing",
+  "Servicing"
+];
+
+const preLockTagId = "tag_12za4t";
+const applicationTagId = "tag_12za6l";
+
+const Info = ({ contactKey, applyTag }) => {
   const { secret, airtableKey, airtableBase } = useStoreState();
 
   const [isLoading, setLoadingState] = useState(true);
@@ -13,9 +26,6 @@ const Info = ({ contactKey }) => {
   useEffect(() => {
     if (info.contactKey === contactKey)
       return;
-
-    console.log('contact key here');
-    console.log(contactKey);
   
     const uri = `/api/search?auth_secret=${secret}&contact_key=${encodeURIComponent(contactKey)}`;
     // For the hosted version, we pass the Airtable credentials to the server
@@ -55,9 +65,6 @@ const Info = ({ contactKey }) => {
   if (!info || !info.contact)
     return <div className="notice">No record found.</div>;
 
-  console.log('info is here');
-  console.log(info);
-
   // BORROWER PROFILE
   // loan id
   // phone
@@ -76,6 +83,16 @@ const Info = ({ contactKey }) => {
   // Assets & debts
   // ID records
 
+  
+  const metadataValues = info.contact?.data.filter(e => e.type !== 'boolean');
+  const booleanRecords = info.contact?.data.filter(e => e.type === 'boolean');
+
+  const accountRecords = info.account?.data.filter(r => r.label !== 'Status');
+
+  const currentStatus = info.account?.data.find(r => r.label === 'Status');
+  console.log('current status here');
+  console.log(currentStatus);
+
   return (
     <div className="info">
       <div className="info-card">
@@ -86,11 +103,11 @@ const Info = ({ contactKey }) => {
         ) : undefined }
       </div>
       <div className="info-contact">
-        { info.contact?.data ? (
+        { metadataValues ? (
           <>
             <div className="data-title">Borrower profile</div>
             <ul className="list-data">
-              {info.contact.data.map((e, idx) => <li key={idx}>
+              {metadataValues.map((e, idx) => <li key={idx}>
                 <div className="info-entry">
                   <div className="info-label">{e.label}</div>
                   <div className="info-value"><DataElement type={e.type} value={e.value} /></div>
@@ -100,12 +117,13 @@ const Info = ({ contactKey }) => {
           </>
         ) : undefined }
       </div>
+
       <div className="info-account">
-        { info.account?.data ? (
+        { accountRecords ? (
             <>
-              <div className="data-title">Loan team</div>
+              <div className="data-title">Team ownership</div>
               <ul className="list-data">
-               {info.account.data.map((e, idx) => <li key={idx}>
+               {accountRecords.map((e, idx) => <li key={idx}>
                   <div className="info-entry">
                     <div className="info-label">{e.label}</div>
                     <div className="info-value"><DataElement type={e.type} value={e.value} /></div>
@@ -114,6 +132,60 @@ const Info = ({ contactKey }) => {
               </ul>
             </>
           ) : undefined }
+      </div>
+
+      <div className="info-account">
+        <div className="data-title">Status</div>
+        <ul className="list-data">
+          <select
+            className="select-contact"
+            value={info.account?.data.find(r => r.label === 'Status').value}
+            onChange={(e) => {
+              const newAccountData = info.account.data.map(r => {
+                if (r.label === 'Status')
+                  return {
+                    ...r,
+                    value: e.target.value
+                  }
+                
+                return r;
+              });
+
+              const newInfo = {
+                ...info,
+                account: {
+                  data: newAccountData 
+                }
+              };
+
+              if (e.target.value === 'Pre-lock')
+                applyTag(preLockTagId);
+
+              console.log('new info here');
+              console.log(newInfo);
+
+              return setInfo(newInfo);
+            }}
+          >
+            {statuses.map(c => <option key={c}>{c}</option>)}
+          </select>
+        </ul>
+      </div>
+
+      <div className="info-account">
+          { booleanRecords ? (
+          <>
+            <div className="data-title">Required information</div>
+            <ul className="list-data">
+              {booleanRecords.map((e, idx) => <li key={idx}>
+                <div className="info-entry">
+                  <div className="info-label">{e.label}</div>
+                  <div className="info-value"><DataElement type={e.type} value={e.value} /></div>
+                </div>
+              </li>)}
+            </ul>
+          </>
+        ) : undefined }
       </div>
     </div>
   );

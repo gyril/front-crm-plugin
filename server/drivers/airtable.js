@@ -15,7 +15,8 @@ const fields = {
   ],
   account: [
     {label: 'Loan consultant associate', type: 'string'},
-    {label: 'Loan consultant', type: 'currency'}
+    {label: 'Loan consultant', type: 'string'},
+    {label: 'Status', type: 'badge'}
   ]
 };
 

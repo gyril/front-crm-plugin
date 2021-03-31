@@ -38,7 +38,6 @@ export default ({ children }) => {
   useEffect(() => {
     // The auth_secret is used for authentication of the plugin
     const secret = (new URL(document.location.href)).searchParams.get('auth_secret');
-    console.log(`Secret is ${secret}`);
 
     dispatch({type: 'secret_set', value: secret});
 

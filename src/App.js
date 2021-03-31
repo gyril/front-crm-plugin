@@ -25,6 +25,10 @@ const Application = () => {
     });
   }, [frontContext, conversation]);
 
+  const applyTag = tagId => {
+    frontContext.tag([tagId]);
+  }
+
   return <div className="app">
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>
@@ -32,7 +36,7 @@ const Application = () => {
           { (type === 'singleConversation' && currentContact) ? (
             <>
               <ContactsDropdown contacts={contacts} currentContact={currentContact} setContact={setCurrentContact} />
-              <Info contactKey="lsmithbetter@gmail.com" />
+              <Info contactKey="lsmithbetter@gmail.com" applyTag={applyTag} />
             </>
           ) : <div className="notice">This plugin only works with conversations.</div> }
         </Route>
